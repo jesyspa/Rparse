@@ -15,11 +15,10 @@
   (env parent (make-hash)))
 
 (define (get-hash-with e str)
-  (if (hash-has-key? (env-values e) str)
-      (env-values e)
-      (if (false? (env-parent e))
-          #f
-          (get-hash-with (env-parent e) str))))
+  (cond
+    [(hash-has-key? (env-values e) str) (env-values e)]
+    [(env-parent e) (get-hash-with (env-parent e) str)]
+    [else #f]))
 
 (define (env-define! e str value)
   (hash-set! (env-values e) str value))
