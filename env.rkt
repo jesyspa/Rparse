@@ -18,7 +18,7 @@
   (cond
     [(hash-has-key? (env-values e) str) (env-values e)]
     [(env-parent e) (get-hash-with (env-parent e) str)]
-    [else #f]))
+    [else (error (format "Unknown identifier ~a" str))]))
 
 (define (env-define! e str value)
   (hash-set! (env-values e) str value))

@@ -18,6 +18,8 @@
     [(equal? (first tree) 'symbol) (and (= (length tree) 2)
                                         (string? (second tree)))]
     [(equal? (first tree) 'magic) (= (length tree) 1)]
+    [(equal? tree '(boolean #f)) #t]
+    [(equal? tree '(boolean #t)) #t]
     [(equal? (first tree) 'list) (andmap rtree? (cdr tree))]
     [else #f]))
 
